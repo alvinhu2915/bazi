@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>小胡子命理黑金館｜八字流年線上解析</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+    }
+
+    body {
+      background: #050509;
+      color: #f5f5f5;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      padding: 16px 0 12px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #f8e29b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 215, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    nav {
+      font-size: 14px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      color: #ffe27a;
+    }
+
+    .hero {
+      padding: 36px 0 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: #f1e5b8;
+      margin-bottom: 20px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 215, 0, 0.45);
+      padding: 4px 10px;
+      font-size: 12px;
+      color: #ffe9a8;
+      background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.15), transparent);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #f8e29b, #f7c948);
+      color: #201200;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 12px rgba(247, 201, 72, 0.4);
+    }
+
+    .btn-primary span.icon {
+      font-size: 16px;
+    }
+
+    .btn-outline {
+      padding: 9px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      background: transparent;
+      color: #ffe9a8;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: #d5d2c5;
+      margin-top: 4px;
+    }
+
+    .hero-card {
+      border-radius: 16px;
+      padding: 18px 16px;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      background: radial-gradient(circle at top, rgba(255, 215, 0, 0.18), transparent 60%), linear-gradient(145deg, rgba(12, 10, 5, 0.95), rgba(5, 5, 9, 0.98));
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-card-title {
+      font-size: 14px;
+      color: #ffe9a8;
+      margin-bottom: 6px;
+    }
+
+    .hero-card-main {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-sub {
+      font-size: 13px;
+      color: #e6dfc8;
+      margin-bottom: 12px;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .hero-pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      background: rgba(5, 5, 9, 0.7);
+      text-align: center;
+    }
+
+    .section {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span.badge {
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      padding: 2px 8px;
+      color: #ffe9a8;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: #d8d3c3;
+      margin-bottom: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      border-radius: 14px;
+      padding: 14px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at top left, rgba(255, 215, 0, 0.06), transparent), rgba(9, 9, 12, 0.9);
+      font-size: 13px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      color: #ffe9a8;
+    }
+
+    .card-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f7d14b;
+      margin-bottom: 4px;
+    }
+
+    .card-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 6px 0;
+    }
+
+    .card-list li {
+      position: relative;
+      padding-left: 14px;
+      margin-bottom: 3px;
+    }
+
+    .card-list li::before {
+      content: "•";
+      position: absolute;
+      left: 3px;
+      top: 0;
+      color: #f7d14b;
+    }
+
+    .card-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #c6c0af;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .step {
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px dashed rgba(255, 215, 0, 0.4);
+      background: rgba(7, 7, 11, 0.9);
+    }
+
+    .step-num {
+      font-size: 11px;
+      color: #f7d14b;
+      margin-bottom: 3px;
+    }
+
+    .step-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .highlight-box {
+      border-radius: 14px;
+      padding: 14px 12px;
+      border: 1px solid rgba(247, 201, 72, 0.6);
+      background: radial-gradient(circle at top left, rgba(247, 201, 72, 0.18), transparent 60%), rgba(8, 6, 3, 0.96);
+      font-size: 13px;
+    }
+
+    .highlight-box p {
+      margin-bottom: 6px;
+    }
+
+    .highlight-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-section {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .contact-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 13px;
+    }
+
+    .contact-list li {
+      margin-bottom: 6px;
+    }
+
+    .contact-label {
+      display: inline-block;
+      min-width: 70px;
+      color: #f5e3ac;
+    }
+
+    .fake-form {
+      border-radius: 14px;
+      padding: 12px 12px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(9, 9, 13, 0.94);
+      font-size: 12px;
+    }
+
+    .fake-field {
+      margin-bottom: 8px;
+    }
+
+    .fake-label {
+      font-size: 11px;
+      color: #d6d0c0;
+      margin-bottom: 3px;
+    }
+
+    .fake-input {
+      border-radius: 8px;
+      padding: 6px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(5, 5, 9, 0.96);
+      color: #f7f7f7;
+    }
+
+    .fake-input.small {
+      max-width: 160px;
+    }
+
+    footer {
+      padding: 18px 0 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      color: #a7a19a;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">胡</div>
+        小胡子命理黑金館
+      </div>
+      <nav>
+        <a href="#service">服務內容</a>
+        <a href="#flow">預約流程</a>
+        <a href="#about">關於小胡</a>
+        <a href="#contact">線上預約</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div>
+          <h1 class="hero-title">八字流年線上解析，一天內回覆你的迷惘</h1>
+          <p class="hero-subtitle">結合旅遊業與房仲業實戰經驗的命理顧問，以實用角度為你看懂 2026 之前的人生節奏。</p>
+          <div class="hero-tags">
+            <span class="tag">精準流年｜事業・財運・感情</span>
+            <span class="tag">線上送件・LINE 回覆</span>
+            <span class="tag">文字報告可存檔</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#contact">
+              <button class="btn-primary">
+                <span class="icon">☯</span>
+                立即預約八字解析
+              </button>
+            </a>
+            <a href="#service">
+              <button class="btn-outline">
+                先看看提供哪些服務 →
+              </button>
+            </a>
+          </div>
+          <p class="hero-note">※ 本頁為最基本一頁式網站架構，可直接上線使用，後續可再慢慢加內容。</p>
+        </div>
+
+        <aside class="hero-card">
+          <div class="hero-card-title">當前主打方案</div>
+          <div class="hero-card-main">2025–2026 流年重點深度解析</div>
+          <div class="hero-card-sub">從八字角度整理這兩年在事業、財運、感情與健康的關鍵提醒。</div>
+          <div class="hero-card-grid">
+            <div class="hero-pill">約 2–3 頁文字報告</div>
+            <div class="hero-pill">2 個重點提問加強說明</div>
+            <div class="hero-pill">48 小時內完成</div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Service -->
+      <section id="service" class="section">
+        <div class="section-title">🔮 八字服務方案<span class="badge">可依實際收費調整</span></div>
+        <p class="section-desc">以下為示意價格與內容，你可以依自己的專業與市場定位，調整為 499／699／999 等不同檔次。文字都已排版好，直接修改金額即可上線。</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">基礎流年解析</div>
+              <div class="card-tag">適合第一次算命</div>
+            </div>
+            <div class="card-price">NT$ 499</div>
+            <ul class="card-list">
+              <li>以今年＋明年為主的流年概況</li>
+              <li>事業＆財運大方向說明</li>
+              <li>簡要感情、人際與健康提醒</li>
+            </ul>
+            <div class="card-footer">
+              <span>文字約 1–2 頁</span>
+              <span>3 個工作天內完成</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">事業・財運專業版</div>
+              <div class="card-tag">推薦上班族／斜槓族</div>
+            </div>
+            <div class="card-price">NT$ 899</div>
+            <ul class="card-list">
+              <li>工作運勢、轉職／創業時機分析</li>
+              <li>財運格局＆2025–2026 重要節點</li>
+              <li>適合領域與合作關係提醒</li>
+              <li>1 次文字追問補充</li>
+            </ul>
+            <div class="card-footer">
+              <span>約 2–3 頁深度報告</span>
+              <span>48 小時內完成</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">感情・關係專注版</div>
+              <div class="card-tag">單身／交往／婚姻皆可</div>
+            </div>
+            <div class="card-price">NT$ 899</div>
+            <ul class="card-list">
+              <li>感情運勢＆對象特質分析</li>
+              <li>適合的相處模式與地雷提醒</li>
+              <li>遇到問題時的調整建議</li>
+              <li>可加購雙人合盤（另計）</li>
+            </ul>
+            <div class="card-footer">
+              <span>約 2–3 頁文字</span>
+              <span>LINE／Email 寄送</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flow -->
+      <section id="flow" class="section">
+        <div class="section-title">🧾 預約流程（線上完成，不用見面）</div>
+        <p class="section-desc">整體流程維持在四步驟，方便你在任何平台轉貼：粉專、IG、Line 貼文都可以直接引用。</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">STEP 1</div>
+            <div class="step-title">選擇方案</div>
+            <div>在本頁確認想要的服務內容與價位，有問題可先私訊詢問。</div>
+          </div>
+          <div class="step">
+            <div class="step-num">STEP 2</div>
+            <div class="step-title">提供資料</div>
+            <div>提供姓名、性別、出生年月日（國曆／農曆）、出生時間與想了解的重點。</div>
+          </div>
+          <div class="step">
+            <div class="step-num">STEP 3</div>
+            <div class="step-title">完成付款</div>
+            <div>目前支援匯款／轉帳／Line Pay／街口（可依你實際使用方式調整）。</div>
+          </div>
+          <div class="step">
+            <div class="step-num">STEP 4</div>
+            <div class="step-title">收到報告</div>
+            <div>於約定時間內，以 LINE 或 Email 方式寄出完整文字報告，可截圖保存。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section">
+        <div class="section-title">👩‍🏫 關於小胡</div>
+
+        <div class="highlight-box">
+          <p>嗨，我是小胡，長期在旅遊業與房仲業第一線服務，也因為接觸各種人生故事，慢慢走進命理世界。</p>
+          <p>我喜歡把八字當成「人生使用說明書」，不是嚇人的東西，而是幫你看懂自己節奏的工具：什麼時候適合衝、什麼時候要收、哪些關係可以多珍惜、哪些選擇不必太勉強。</p>
+          <p>本頁是一個最精簡的一頁式網站，方便你快速預約與查詢。未來也會慢慢加入更多文章與案例分享，讓命理變得更接地氣、更好懂。</p>
+        </div>
+      </section>
+
+      <!-- Contact / Booking -->
+      <section id="contact" class="section">
+        <div class="section-title">📲 線上預約與聯絡方式</div>
+        <p class="section-desc">你可以選擇直接加 LINE、私訊粉專，或填寫下方預約資訊（目前為示意表單，實際可改成 Google 表單連結）。</p>
+
+        <div class="contact-section">
+          <div>
+            <ul class="contact-list">
+              <li><span class="contact-label">聯絡人</span>小胡（命理顧問）</li>
+              <li><span class="contact-label">LINE</span>請搜尋：<strong>@xxxxx</strong>（可改成你的 LINE ID）</li>
+              <li><span class="contact-label">Email</span>example@mail.com（可改成你的信箱）</li>
+              <li><span class="contact-label">服務時間</span>約 13:00–22:00，如有急件可先私訊詢問。</li>
+            </ul>
+            <p style="font-size: 12px; color: #bdb7a7; margin-top: 8px;">※ 為保護你的隱私，所有內容僅用於命理分析，不另外對外公開。</p>
+          </div>
+
+          <div class="fake-form">
+            <div class="fake-field">
+              <div class="fake-label">想預約的服務方案</div>
+              <div class="fake-input">例：事業・財運專業版（NT$ 899）</div>
+            </div>
+            <div class="fake-field">
+              <div class="fake-label">基本資料</div>
+              <div class="fake-input">姓名、小名（可只留小名）、性別、出生年月日、出生時間、出生地</div>
+            </div>
+            <div class="fake-field">
+              <div class="fake-label">想特別了解的重點</div>
+              <div class="fake-input">例：今年適不適合換工作？是否適合接案或創業？感情要注意什麼？</div>
+            </div>
+            <div class="fake-field">
+              <div class="fake-label">聯絡方式</div>
+              <div class="fake-input">你的 LINE ID 或 Email，方便寄送解說內容。</div>
+            </div>
+            <div style="margin-top: 8px; display:flex; justify-content:flex-end;">
+              <button class="btn-primary" style="font-size: 12px; padding: 7px 14px; box-shadow:none;">
+                送出預約資訊（示意）
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> 小胡子命理黑金館｜一頁式八字線上解析</div>
+      <div>本頁為示意版架構，可依實際收費與條款調整。</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
